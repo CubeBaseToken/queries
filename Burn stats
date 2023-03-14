@@ -1,0 +1,12 @@
+SELECT
+  SUM(CAST(Amount AS DOUBLE)) / 1000000000 AS "Amount"
+FROM
+  (
+    SELECT
+      SUM(CAST(value AS DOUBLE)) / 1e9 AS "Amount"
+    FROM
+      erc20_bnb.evt_Transfer
+    WHERE
+      contract_address = 0x348af621847fd7032dd1863f08262fd83d859c1d
+      AND "to" = 0x000000000000000000000000000000000000dead
+  ) AS data
